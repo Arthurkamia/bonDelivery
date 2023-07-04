@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class OpConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'op'
+    verbose_name = 'Gestion des bons'

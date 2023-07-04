@@ -1,0 +1,33 @@
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block">
+        <div class="row align-items-center bg-white py-3 px-lg-5">
+            <div class="col-lg-4">
+                <a href="{% url 'home' %}" class="navbar-brand p-0 d-none d-lg-block">
+                    <h1 class="m-0 display-4 text-uppercase text-primary">Mak<span class="text-secondary font-weight-normal">omi</span></h1>
+                </a>
+            </div>
+            <div class="col-lg-8 text-center text-lg-right justifyEnd">
+                {% if request.user.id is None %}
+                        <a href="{% url 'account_login'%}" class="p-1">
+                            <button class="btn btn-primary font-weight-bold px-3">Se connecter</button>
+                        </a>
+                        <a href="{% url 'account_signup'%}" class="p-1">
+                            <button class="btn btn-primary font-weight-bold px-3">Créer un compte</button>
+                        </a>
+                {% elif request.user.User_Blog.all.count < 1 %}
+                        <a href="{% url 'userBlogAdd'%}"class="p-1">
+                            <button class="btn btn-primary font-weight-bold px-3">Créez votre premier blog</button>
+                        </a>
+                {% elif request.user.User_Blog.all.count > 0 %}
+                        <a href="{% url 'userBlogs'%}" class="p-1">
+                            <button class="btn btn-primary font-weight-bold px-3">Vos blogs</button>
+                        </a>
+                        <a href="{% url 'userBlogAdd'%}" class="p-1">
+                            <button class="btn btn-primary font-weight-bold px-3">Ajouter un blog</button>
+                        </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->

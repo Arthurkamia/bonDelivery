@@ -1,0 +1,34 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %} My Home Page {% endblock %}</title>
+    <meta name="keywords" content="{% block keywords %} Home Keywords {% endblock %}">
+    <meta name="description" content="{% block description %} Home description  {% endblock %}">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static '' %}css/style.css" rel="stylesheet">
+    <link href="{% static '' %}css/other.css" rel="stylesheet">
+    <link href="{% static '' %}css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+{% block slider %} {% endblock %}
+{% block Featured %} {% endblock %}
+{% block body %} {% endblock %}
+{% include 'footer.html' %}
+{% include 'foot.html' %}
+
+{% block foot %} {% endblock %}
+
+
+</body>
+</html>

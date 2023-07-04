@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{title}} | Makomi {% endblock %}
+
+{% block body %}
+    <!-- News With Sidebar Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 pd-2">
+                    <!-- News Detail Start -->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+
+                                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit">Créer</button>
+                                {{ form.media }}
+                            </form>
+                    <!-- News Detail End -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- News With Sidebar End -->
+{% endblock %}
+{% block foot %}
+<!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="{% static '' %}lib/easing/easing.min.js"></script>
+    <script src="{% static '' %}lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static '' %}js/main.js"></script>
+
+    <script src="{% static '' %}js/jquery-3.4.1.min.js"></script>
+    <script src="{% static '' %}js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+

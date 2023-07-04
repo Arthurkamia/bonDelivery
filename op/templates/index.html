@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Orange bon checker | Page d'accueil {% endblock %}
+
+
+{% block body %}
+
+    <div class="container w-bg" style="padding-top:30px">
+        <div class="row col-lg-12">
+            <label class="col-lg-9" for="code">Entrez le code du bon </label>
+        </div>
+        <div class="row col-lg-12">
+            <div class="input-group text-left col-lg-9" style="">
+                <input type="text" name="code" placeholder="Code" class="form-control p-4" maxlength="150" required="" id="code">
+                <div id="codeCheck" class="input-group-append">
+                <button href="{% url 'check' %}" id="check" style="font-size:15px" class="input-group-text bg-primary text-dark border-0 px-3">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <div class="text-left col-lg-9" style="">
+                <p id="text-code" style="color:#ff7900"></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 d-none" id="val">
+            <div class="text-left col-lg-9" style="">
+                <label for="mount">Entrez le montant utilisé </label>
+                <input type="text" name="mount" placeholder="Montant à déduire" class="form-control p-4" maxlength="150" required="" id="mount">
+            </div>
+            <div class="text-left col-lg-9" style="">
+                <p id="text-montant" class="" style="color:#ff7900"></p>
+            </div>
+            <div id="mountCheck" class="col-lg-9 text-right" style="display:flex; padding-top:50px">
+                <button href="{% url 'checked' %}" id="valider" style="font-size:15px; width:100%" class="btn  btn-primary font-weight-medium px-3 p-1 ">Valider</button>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block foot %}
+<!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="{% static '' %}lib/easing/easing.min.js"></script>
+    <script src="{% static '' %}lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static '' %}js/main.js"></script>
+
+    <script src="{% static '' %}js/jquery-3.4.1.min.js"></script>
+    <script src="{% static '' %}js/bootstrap.bundle.min.js"></script>
+    <script>
+        $('#check').click(function(e) {
+            e.preventDefault();
+            const codeVal = document.getElementById('code').value;
+            $.ajax({
+                type: 'POST',
+                data : { code : codeVal },
+                url: '{% url 'check' %}',
+                dataType : 'json',
+                success: function(data) {
+                    if (data.value === true){
+                        $('#val').removeClass('d-none');
+                        $('#text-code').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === false){
+                        $('#val').addClass('d-none');
+                        $('#text-code').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === "Checked"){
+                        $('#val').addClass('d-none');
+                        $('#text-code').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === "Solde"){
+                        $('#text-montant').text(data.text);
+                        $('#text-code').text(data.text);
+                        console.log(data.text)
+                    }
+                    }
+            });
+        });
+    </script>
+
+    <script>
+        $('#valider').click(function(e) {
+            e.preventDefault();
+            const codeVal = document.getElementById('code').value;
+            const mountVal = document.getElementById('mount').value;
+            $.ajax({
+                type: 'POST',
+                data : { code : codeVal, mount:mountVal },
+                url: '{% url 'checked' %}',
+                dataType : 'json',
+                success: function(data) {
+                    if (data.value === true){
+                        $('#val').removeClass('d-none');
+                        $('#text').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === false){
+                        $('#val').addClass('d-none');
+                        $('#text').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === "Checked"){
+                        $('#val').addClass('d-none');
+                        $('#text').text(data.text);
+                        console.log(data.text)
+                    }
+                    if (data.value === "Solde"){
+                        $('#text-montant').text(data.text);
+                        $('#text').text(data.text);
+                        console.log(data.text)
+                    }
+                    }
+            });
+        });
+    </script>
+{% endblock %}
+
